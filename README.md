@@ -78,12 +78,66 @@ ___
 ##### - Response -> React UI Layer
 ##### - Hidden Layer (ChromaDB Server)
 
-UI Design
+UI Layout Design
 ---
 
 ![alt text](./figures/Layout.png "Layout")
 
-Function API
+Interfaces
 ---
 
+### Prompting
 
+UploadFile: Button
+___
+
+SearchOnInternet: ToggleButton
+___
+
+ReferenceSettings: DropdownMenu
+___
+
+PromptText: InputTextBox
+___
+
+ResponseText: TextBox
+___
+
+### Indicator
+
+ShowText: TextBox
+___
+
+ShowFigure: FigureBox
+___
+
+ShowReference: LocalLink
+___
+
+### Searching Result
+
+ResultList: ItemList
+___
+
+ResultItem: LocalLink \ RemoteLink
+___
+
+### Header
+
+SearchBox: InputTextBox
+___
+
+Signin: Button
+___
+
+Login: Button
+___
+
+About: Button
+___
+
+Help: Button
+___
+
+Logo: Icon
+___
