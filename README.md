@@ -1,8 +1,3 @@
----
-title: APP Development
-
----
-
 APP Development
 ===
 Environment
@@ -88,56 +83,72 @@ Interfaces
 
 ### Prompting
 
-UploadFile: Button
+#### UploadFile: Button
+Upload file from local to chromadb.
 ___
 
-SearchOnInternet: ToggleButton
+#### SearchOnInternet: ToggleButton
+If toggled, LLM will search the prompt on internet, and give some advice.
 ___
 
-ReferenceSettings: DropdownMenu
+#### ReferenceSettings: DropdownMenu
+Choose the data source as reference.
 ___
 
-PromptText: InputTextBox
+#### PromptText: InputTextBox
+Input the prompt.
 ___
 
-ResponseText: TextBox
+#### ResponseText: TextBox
+Show response from LLM.
 ___
 
 ### Indicator
 
-ShowText: TextBox
+#### ShowText: TextBox
+Show reference paragraph.
 ___
 
-ShowFigure: FigureBox
+#### ShowFigure: FigureBox
+Show reference figure.
 ___
 
-ShowReference: LocalLink
+#### ShowReference: LocalLink
+Show source link to local file location.
 ___
 
 ### Searching Result
 
-ResultList: ItemList
+#### ResultList: ItemList
+Browser page, show item that directly search on search engine.
 ___
 
-ResultItem: LocalLink \ RemoteLink
+#### ResultItem: LocalLink \ RemoteLink
+Website link, or local file link.
 ___
 
 ### Header
 
-SearchBox: InputTextBox
+#### SearchBox: InputTextBox
+Searching input.
 ___
 
-Signin: Button
+#### Signin: Button
+User registration for seperating chromadb storage location.
 ___
 
-Login: Button
+#### Login: Button
+Login to access the correct chromadb storage.
 ___
 
-About: Button
+#### About: Button
+About this app.
 ___
 
-Help: Button
+#### Help: Button
+Help message.
 ___
 
-Logo: Icon
+#### Logo: Icon
+Logo for this app.
 ___
