@@ -81,7 +81,7 @@ ___
 UI Design
 ---
 
-
+![alt text](./figures/Layout.png "Layout")
 
 Function API
 ---
