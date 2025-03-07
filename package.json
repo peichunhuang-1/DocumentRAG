@@ -10,13 +10,25 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "antd": "^5.24.1",
+    "axios": "^1.7.9",
     "chromadb": "^1.10.4",
+    "chromadb-default-embed": "^2.14.0",
+    "compromise": "^14.14.4",
+    "dockerode": "^4.0.4",
+    "harper.js": "^0.23.0",
+    "nanoid": "^5.1.2",
     "ollama": "^0.5.13",
     "openai": "^4.85.3",
+    "pdfjs-dist": "^4.10.38",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-pdf": "^9.2.1",
+    "unstructured-client": "^0.20.0"
   },
   "devDependencies": {
+    "@types/dockerode": "^3.3.35",
+    "@types/node": "^22.13.8",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
@@ -28,9 +40,25 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "typescript": "^5.2.2",
-    "vite": "^5.1.6",
+    "vite": "^6.2.0",
     "vite-plugin-electron": "^0.28.6",
     "vite-plugin-electron-renderer": "^0.14.5"
   },
-  "main": "dist-electron/main.js"
+  "main": "dist-electron/main.js",
+  "build": {
+    "appId": "com.example.research.go",
+    "productName": "research.go",
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "bin"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "public/logo.png"
+    }
+  }
 }

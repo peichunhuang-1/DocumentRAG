@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import path from 'node:path'
 import electron from 'vite-plugin-electron/simple'
 import react from '@vitejs/plugin-react'
+import { fileURLToPath } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -26,4 +27,9 @@ export default defineConfig({
         : {},
     }),
   ],
+  build: {
+    rollupOptions: {
+      external: ['ssh2', 'chromadb'],
+    }
+  },
 })

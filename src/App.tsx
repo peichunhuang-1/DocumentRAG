@@ -1,34 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/electron-vite.animate.svg'
-import './App.css'
+import { Layout, Menu } from 'antd';
+import PdfJs from './pdf-viewer/pdf-viewer';
+import UserInterface from './users/users-interface';
+import {useEffect, useRef, useState} from 'react';
+import { notification } from 'antd';
+import {ChatInterface, EmptyChatInterface} from './chat-interface/chat-interface';
+const { Header, Content, Footer, Sider } = Layout;
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    const originalError = console.error;
+    
+    console.error = (...args: any[]) => {
+      notification.error({
+        message: 'An error occurred',
+        description: args.join(' '), 
+        duration: 5, 
+      });
+      
+      originalError.apply(console, args);
+    };
+
+    return () => {
+      console.error = originalError;
+    };
+  }, []);
+  const [userInfo, setUserInfo] = useState( {name: ''} );
 
   return (
-    <>
-      <div>
-        <a href="https://electron-vite.github.io" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Layout>
+      <Header style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', background: '#eee' }}>
+        <UserInterface setUserInfo={setUserInfo}/>
+      </Header>
+      <Layout>
+        <Sider style={{ background: '#ddd' }} >
+          <Menu></Menu>
+        </Sider>
+        <Content>
+          <PdfJs src={"/Users/huangpeijun/Desktop/App/DocumentRAG/DocumentRAG/public/1.pdf"} height={1000} clipRegion={{x:100, y: 100, width:1000, height:800}}></PdfJs>
+        </Content>
+        <Sider width={500} >
+          { userInfo.name == ''? <EmptyChatInterface/>: <ChatInterface userInfo={userInfo}/> }
+        </Sider>
+      </Layout>
+    </Layout>
   )
 }
 
