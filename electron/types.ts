@@ -26,7 +26,7 @@ export interface messageProps {
   ids: string[];
 }
 
-export interface promptProps {
+export interface queryProps {
   content: string;
   nResults: Number;
   user: string;

@@ -21,7 +21,7 @@ export default function SignUp() {
         }
 
         try {
-            const success = await ipcRenderer.registUser( { name: userName, password });
+            const success = await ipcRenderer.userRegister( { name: userName, password });
             if (!success) {
                 notify.open({ type: 'error', content: 'Sign up failed, User already exists' });
             } else {

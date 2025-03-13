@@ -1,5 +1,5 @@
 import { ipcRenderer, contextBridge } from 'electron'
-import { userProps, promptProps, messageProps, knowledgePromptProps, knowledgeProps } from './types';
+import { userProps, promptProps, messageProps, queryProps, knowledgePromptProps, knowledgeProps } from './types';
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld('ipcRenderer', {
   on(...args: Parameters<typeof ipcRenderer.on>) {
@@ -21,16 +21,21 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 
   // You can expose other APTs you need here.
   // ...
-  openFileDialog: () => ipcRenderer.invoke('open-file-dialog'),
-  openFile: (filename: string) => ipcRenderer.invoke('open-file', filename),
-  registUser: (user: userProps) => ipcRenderer.invoke('regist', user), 
-  validateUser: (user: userProps) => ipcRenderer.invoke('validate-user', user), 
-  promptLLM: (prompt: promptProps) => ipcRenderer.invoke('prompt-llm', prompt),
-  onPromptedStream: (func: Function) => ipcRenderer.on('llm-stream', (event, res) => {func(res);}), 
-  launchContainers: (user_info: userProps) => ipcRenderer.invoke('launch-docker-containers', user_info), 
-  createChromaClient: (session_name: string) => ipcRenderer.invoke('create-chroma-client', session_name), 
-  addConversationHistory: (message: messageProps) => ipcRenderer.invoke('add-session-history', message), 
-  getConversationHistory: (prompt: promptProps) => ipcRenderer.invoke('query-session-history', prompt),
-  addKnowledge: (knowledge: knowledgeProps) => ipcRenderer.invoke('add-knowledge', knowledge),
-  getKnowledge: (prompt: knowledgePromptProps) => ipcRenderer.invoke('query-knowledge', prompt),
+  fileOpenDialog: () => ipcRenderer.invoke('file:open-dialog'),
+  fileRead: (filename: string) => ipcRenderer.invoke('file:read', filename),
+  userRegister: (user: userProps) => ipcRenderer.invoke('user:register', user), 
+  userValidate: (user: userProps) => ipcRenderer.invoke('user:validate', user), 
+  promptLLM: (prompt: promptProps) => ipcRenderer.invoke('llm:prompt', prompt),
+  onLLMStream: (func: Function) => ipcRenderer.on('llm:stream', (event, res) => {func(res);}), 
+  dockerLaunch: (user_info: userProps) => ipcRenderer.invoke('docker:launch', user_info), 
+  sessionCreate: (session_name: string) => ipcRenderer.invoke('session:create', session_name), 
+  sessionNote: (message: messageProps) => ipcRenderer.invoke('session:note', message), 
+  sessionQuery: (query: queryProps) => ipcRenderer.invoke('session:query', query),
+  knowledgeNote: (knowledge: knowledgeProps) => ipcRenderer.invoke('knowledge:note', knowledge),
+  knowledgeQuery: (query: knowledgePromptProps) => ipcRenderer.invoke('knowledge:query', query),
+  chatGetRooms: (name: string) => ipcRenderer.invoke('chat:get-rooms', name),
+  chatGetOrCreate: (user_name: string, session_id: string, title: string) => ipcRenderer.invoke('chat:get-or-create', user_name, session_id, title),
+  chatHistory: (user_name: string, session_id: string, content: any) => ipcRenderer.invoke('chat:history', user_name, session_id, content),
+  chatSetTitle: (user_name: string, session_id: string, title: string) => ipcRenderer.invoke('chat:set-title', user_name, session_id, title),
+  chatDelete: (user_name: string, session_id: string) => ipcRenderer.invoke('chat:delete', user_name, session_id),
 })

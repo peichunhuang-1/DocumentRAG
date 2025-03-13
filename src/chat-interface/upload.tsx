@@ -38,7 +38,7 @@ export default function UpLoadPdf({ serverURL, style }: UpLoadPdfProps) {
         async ()=>{
             if (ipcRenderer) {
                 setLoading(true);
-                const filePath = await ipcRenderer.openFileDialog() as string;
+                const filePath = await ipcRenderer.fileOpenDialog() as string;
                 setLoading(false);
                 if (filePath) setPDF({src: filePath} as PdfProps);
             } else {
@@ -49,11 +49,10 @@ export default function UpLoadPdf({ serverURL, style }: UpLoadPdfProps) {
 
     useEffect( () => {
         if (!pdf) {
-            console.error("PDF file not valid");
             return;
         }
         setLoading(true);
-        ipcRenderer.openFile(pdf.src).then((data: Uint8Array) => {
+        ipcRenderer.fileRead(pdf.src).then((data: Uint8Array) => {
             client?.general.partition({
                 partitionParameters: {
                     files: {
@@ -72,7 +71,9 @@ export default function UpLoadPdf({ serverURL, style }: UpLoadPdfProps) {
                     var data: string[] = [];
                     var meta: {}[] = [];
                     var ids: string[] = [];
+                    var content = '';
                     res.elements?.forEach(element => {
+                        content += element.text;
                         data.push(element.text);
                         ids.push(nanoid());
                         meta.push({});
@@ -80,7 +81,8 @@ export default function UpLoadPdf({ serverURL, style }: UpLoadPdfProps) {
                         // const found = element.text?.match(capturingRegex);
                         // console.log(element.text);
                     });
-                    ipcRenderer.addKnowledge({data: data, ids: ids, meta: meta});
+                    console.log(content);
+                    ipcRenderer.knowledgeNote({data: data, ids: ids, meta: meta});
                 }
             }).catch((e) => {
                 setLoading(false);

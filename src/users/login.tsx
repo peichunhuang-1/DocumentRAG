@@ -21,7 +21,7 @@ export default function Login({ setUserInfoRef }: { setUserInfoRef: (userInfo: {
         }
 
         try {
-            const success = await ipcRenderer.validateUser({ name: userName, password });
+            const success = await ipcRenderer.userValidate({ name: userName, password });
             if (!success) {
                 notify.open({ type: 'error', content: 'Login failed, wrong user name or password' });
             } else {

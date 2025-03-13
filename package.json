@@ -24,7 +24,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-pdf": "^9.2.1",
-    "unstructured-client": "^0.20.0"
+    "react-rnd": "^10.5.2",
+    "unstructured-client": "^0.20.0",
+    "zod-to-json-schema": "^3.24.3"
   },
   "devDependencies": {
     "@types/dockerode": "^3.3.35",
